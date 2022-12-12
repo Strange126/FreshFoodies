@@ -5,6 +5,16 @@ public class Food {
 	protected String description;
 	protected String img;
 	
+	
+	public Food(int food_id, String name, double price, String description, String img) {
+		super();
+		this.food_id = food_id;
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.img = img;
+	}
+	
 	public int getFood_id() {
 		return food_id;
 	}
