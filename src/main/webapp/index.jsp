@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +27,7 @@
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active fs-4 "
 						aria-current="page" href="#">View Cart</a></li>
-					<li class="nav-item"><a class="nav-link fs-4 active" href="#">Sign
-							In</a></li>
+					<li class="nav-item"><a class="nav-link fs-4 active" href="#">Sign In</a></li>
 				</ul>
 			</div>
 		</div>
