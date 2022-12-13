@@ -4,6 +4,13 @@ public class User {
 	protected String name;
 	protected String password;
 	
+	public User(int user_id, String name, String password) {
+		super();
+		this.user_id = user_id;
+		this.name = name;
+		this.password = password;
+	}
+	
 	public int getUser_id() {
 		return user_id;
 	}
