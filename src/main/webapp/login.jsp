@@ -14,7 +14,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid w-100">
-			<a class="navbar-brand" href="#"><img
+			<a class="navbar-brand" href="<%=request.getContextPath()%>FoodServlet"><img
 				src="img/Fresh Foodies-logos_black.png" alt="" width="33"
 				height="33"><b>Fresh Foodies</b></a>
 			<button class="navbar-toggler" type="button"
@@ -54,13 +54,13 @@
 						<div class="row m-3">
 							<div class="col-sm col-sm-offset-3">
 								<label for="LoginUsername">Username:</label> <input
-									class="form-control" id="LoginUsername" placeholder="Username">
+									class="form-control" name="LoginUsername" id="LoginUsername" placeholder="Username">
 							</div>
 						</div>
 						<div class="row m-3">
 							<div class="col-sm col-sm-offset-3">
 								<label for="LoginPassword">Password:</label> <input
-									class="form-control" id="LoginPassword"
+									class="form-control" name="LoginPassword" id="LoginPassword"
 									placeholder="**********">
 							</div>
 						</div>
@@ -68,7 +68,7 @@
 							<div class="col-sm col-sm-offset-3">
 								<div class="col-sm-6 col-sm-offset-3 m-3">
 									<p>
-										<button class="btn btn-primary btn-lg" type="submit">Login</button>
+										<button class="btn btn-primary btn-lg" type="submit" value="Call Servlet">Login</button>
 									</p>
 								</div>
 							</div>
