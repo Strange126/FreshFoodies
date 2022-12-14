@@ -66,7 +66,7 @@
 						</div>
 						<div class="row m-3">
 							<div class="col-sm col-sm-offset-3">
-								<a href="<%=request.getContextPath()%>/SignUp.jsp" class="fw-bold">Have a Account already? SignUp Here!</a>
+								<a href="<%=request.getContextPath()%>/login.jsp" class="fw-bold">Have a Account already? Login Here!</a>
 							</div>
 						</div>
 						<div class="row m-3">
