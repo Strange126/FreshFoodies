@@ -14,7 +14,8 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid w-100">
-			<a class="navbar-brand" href="<%=request.getContextPath()%>FoodServlet"><img
+			<a class="navbar-brand"
+				href="<%=request.getContextPath()%>FoodServlet"><img
 				src="img/Fresh Foodies-logos_black.png" alt="" width="33"
 				height="33"><b>Fresh Foodies</b></a>
 			<button class="navbar-toggler" type="button"
@@ -54,7 +55,8 @@
 						<div class="row m-3">
 							<div class="col-sm col-sm-offset-3">
 								<label for="LoginUsername">Username:</label> <input
-									class="form-control" name="LoginUsername" id="LoginUsername" placeholder="Username">
+									class="form-control" name="LoginUsername" id="LoginUsername"
+									placeholder="Username">
 							</div>
 						</div>
 						<div class="row m-3">
@@ -66,9 +68,15 @@
 						</div>
 						<div class="row m-3">
 							<div class="col-sm col-sm-offset-3">
+								<a href="<%=request.getContextPath()%>/signup.jsp" class="fw-bold">No Account Yet? Sign up here!</a>
+							</div>
+						</div>
+						<div class="row m-3">
+							<div class="col-sm col-sm-offset-3">
 								<div class="col-sm-6 col-sm-offset-3 m-3">
 									<p>
-										<button class="btn btn-primary btn-lg" type="submit" value="Call Servlet">Login</button>
+										<button class="btn btn-primary btn-lg" type="submit"
+											value="Call Servlet">Login</button>
 									</p>
 								</div>
 							</div>
