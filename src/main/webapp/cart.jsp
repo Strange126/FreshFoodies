@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
 <meta charset="ISO-8859-1">
 <title>Viewing Cart</title>
@@ -22,33 +23,23 @@
     <div class="col-md-4 order-md-2 mb-4">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Your cart:</span>
-        <span class="text-muted">3 Items</span>
+        <span class="text-muted">items in cart: <c:out value="${listCarts.size()}"/></span>
       </h4>
       <ul class="list-group mb-3">
+      <c:set var="total" value="${0}"/>
+      <c:forEach var="cart" items="${listCarts}"> 
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
-            <h6 class="my-0">Product name</h6>
-            <small class="text-muted">Brief description</small>
+            <h6 class="my-0"><c:out value="${cart.name}"/></h6>
+            <small class="text-muted"><c:out value="${cart.description}"/></small>
           </div>
-          <span class="text-muted">$12</span>
+          <c:set var="total" value="${total + cart.price}"/>
+          <span class="text-muted">$<c:out value="${cart.price}"/></span>
         </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Second product</h6>
-            <small class="text-muted">Brief description</small>
-          </div>
-          <span class="text-muted">$8</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Third item</h6>
-            <small class="text-muted">Brief description</small>
-          </div>
-          <span class="text-muted">$5</span>
-        </li>
+        </c:forEach>
         <li class="list-group-item d-flex justify-content-between">
           <span>Total Price:</span>
-          <strong>$20</strong>
+          <strong>$<c:out value="${total}"/></strong>
         </li>
       </ul>
       
@@ -161,11 +152,5 @@
     </div>
   </div>
 
-  <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2022-Present Fresh Foodies</p>
-  </footer>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
-        <script src="form-validation.js"></script></body>
 </html>
