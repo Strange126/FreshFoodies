@@ -14,7 +14,8 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid w-100">
-			<a class="navbar-brand" href="#"><img
+			<a class="navbar-brand"
+				href="<%=request.getContextPath()%>/FoodServlet"><img
 				src="img/Fresh Foodies-logos_black.png" alt="" width="33"
 				height="33"><b>Fresh Foodies</b></a>
 			<button class="navbar-toggler" type="button"
@@ -24,12 +25,24 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active fs-4 "
-						aria-current="page" href="#">View Cart</a></li>
-					<li class="nav-item"><a class="nav-link fs-4 active" href="#">Sign
-							In</a></li>
-				</ul>
+				<c:choose>
+					<c:when test="${loggedin}">
+						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							<li class="nav-item"><a class="nav-link active fs-4 "
+								aria-current="page" href="#">View Cart</a></li>
+							<li class="nav-item"><a class="nav-link fs-4 active"
+								href="#"><c:out value="${username}" /></a></li>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							<li class="nav-item"><a class="nav-link active fs-4 "
+								aria-current="page" href="#">View Cart</a></li>
+							<li class="nav-item"><a class="nav-link fs-4 active"
+								href="<%=request.getContextPath()%>/login.jsp">Login</a></li>
+						</ul>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</nav>
@@ -62,18 +75,26 @@
 	</div>
 	<div class="container mt-3">
 		<div class="row border border-2 border-dark rounded">
-		<c:forEach var="food" items="${listFoods}">
-			
+			<c:forEach var="food" items="${listFoods}">
+
 				<div class="card m-3" style="width: 18rem;">
-				<img src=<c:out value="${food.img}"/> class="card-img-top" style="height: 14rem;" alt="...">
+					<img src=<c:out value="${food.img}"/> class="card-img-top"
+						style="height: 14rem;" alt="...">
 					<div class="card-body ">
-						<h5 class="card-title"><c:out value="${food.name}"/> </h5>
-						<h6 class="card-subtitle mb-2 text-muted">$<c:out value="${food.price}"/></h6>
-						<p class="card-text"><c:out value="${food.description}"/></p>
+						<h5 class="card-title">
+							<c:out value="${food.name}" />
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted">
+							$
+							<c:out value="${food.price}" />
+						</h6>
+						<p class="card-text">
+							<c:out value="${food.description}" />
+						</p>
 						<a href="#" class="btn btn-primary">Add to Cart</a>
 					</div>
 				</div>
-		</c:forEach>
+			</c:forEach>
 		</div>
 	</div>
 </body>

@@ -39,12 +39,20 @@ public class FoodServlet extends HttpServlet {
 		return connection;
 	}
 
-	private void listFoods(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-		List <Food> foods = new ArrayList <>();
-		try(Connection connection = getConnection(); 
+	private void listFoods(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		if (request.getAttribute("loggedin") != null) {
+			boolean loggedin = (boolean) request.getAttribute("loggedin");
+			String username = (String) request.getAttribute("username");
+			request.setAttribute(username, response);
+			int user_id = (int) request.getAttribute("user_id");
+		}
+
+		List<Food> foods = new ArrayList<>();
+		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FOOD);) {
 			ResultSet rs = preparedStatement.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int food_id = rs.getInt("food_id");
 				String name = rs.getString("name");
 				double price = rs.getDouble("price");
@@ -52,16 +60,17 @@ public class FoodServlet extends HttpServlet {
 				String img = rs.getString("img");
 				foods.add(new Food(food_id, name, price, description, img));
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		request.setAttribute("listFoods", foods);
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+
 		String action = request.getServletPath();
 		try {
 			switch (action) {
