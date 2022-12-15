@@ -30,8 +30,18 @@
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link active fs-4 "
 								aria-current="page" href="#">View Cart</a></li>
-							<li class="nav-item"><a class="nav-link fs-4 active"
-								href="#"><c:out value="${username}" /></a></li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle fs-4 active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<c:out value="${username}" />
+								</a>
+								 <ul class="dropdown-menu dropdown-menu">
+								 	<li>
+								 		<form action="FoodServlet" method="post">
+								 			<button type="submit" class="btn btn-link text-dark" value="logout" name="button">Log Out</button>
+								 		</form>
+								 	</li>
+								 </ul>
+							</li>
 						</ul>
 					</c:when>
 					<c:otherwise>

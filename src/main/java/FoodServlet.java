@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,25 +69,21 @@ public class FoodServlet extends HttpServlet {
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
+	private void logOut(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		request.removeAttribute("loggedin");
+		request.removeAttribute("username");
+		request.removeAttribute("user_id");
+		request.getRequestDispatcher("/login.jsp").forward(request, response);
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		String action = request.getServletPath();
 		try {
-			switch (action) {
-			case "/insert":
-				break;
-			case "/delete":
-				break;
-			case "/edit":
-				break;
-			case "/update":
-				break;
-			default:
 				listFoods(request, response);
-				break;
-			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
@@ -94,7 +92,19 @@ public class FoodServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		response.setContentType("text/html");
+		try {
+			switch (request.getParameterValues("button")[0]) {
+			case "logout":
+				logOut(request, response);
+				break;
+			default:
+				doGet(request, response);
+				break;
+			}
+		} catch (Exception e) {
+			System.out.println("null");
+		}
 		doGet(request, response);
 	}
 
