@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class CartServlet
@@ -43,17 +44,14 @@ public class CartServlet extends HttpServlet {
     
     private void listCarts(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		if (request.getAttribute("loggedin") != null) {
-			boolean loggedin = (boolean) request.getAttribute("loggedin");
-			String username = (String) request.getAttribute("username");
-			request.setAttribute(username, response);
-			int user_id = (int) request.getAttribute("user_id");
-		}
-
+    	
+    	HttpSession session = request.getSession();
+    	int user_id = (int) session.getAttribute("user_id");
+    	System.out.println(user_id);
 		List<UserCart> carts = new ArrayList<>();
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FOOD_FROM_USER_CART);) {
-			preparedStatement.setInt(1, 2);
+			preparedStatement.setInt(1, 1);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				int cart_id = rs.getInt("cart_id");
