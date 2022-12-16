@@ -29,7 +29,7 @@
 					<c:when test="${loggedin}">
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link active fs-4 "
-								aria-current="page" href="#">View Cart</a></li>
+								aria-current="page" href="<%=request.getContextPath()%>/CartServlet">View Cart</a></li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle fs-4 active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									<c:out value="${username}" />
@@ -101,7 +101,9 @@
 						<p class="card-text">
 							<c:out value="${food.description}" />
 						</p>
-						<a href="#" class="btn btn-primary">Add to Cart</a>
+						<form action="FoodServlet" method="post">
+							<button type="submit" class="btn btn-primary" value="${food.food_id}" name="button">Add to Cart</button>
+						</form>
 					</div>
 				</div>
 			</c:forEach>
