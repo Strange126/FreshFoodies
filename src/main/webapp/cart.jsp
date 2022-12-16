@@ -34,7 +34,11 @@
             <small class="text-muted"><c:out value="${cart.description}"/></small>
           </div>
           <c:set var="total" value="${total + cart.price}"/>
-          <span class="text-muted">$<c:out value="${cart.price}"/></span>
+          <span class="text-muted">$<c:out value="${cart.price}"/> 
+          	<form action="CartServlet" method="post">
+          		<button class="btn btn-danger ms-1" value="${cart.cart_id}" name="button" type="submit" >Delete</button>
+          	</form>
+          </span>
         </li>
         </c:forEach>
         <li class="list-group-item d-flex justify-content-between">
