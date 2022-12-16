@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/FoodServlet")
 public class FoodServlet extends HttpServlet {
@@ -21,6 +22,7 @@ public class FoodServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "cdev";
 	private static final String SELECT_ALL_FOOD = "SELECT * FROM freshfoodies.food;;";
+	private static final String INSERT_INTO_CART = "INSERT INTO freshfoodies.cart VALUES (null, ?, ?);";
 	private static final long serialVersionUID = 1L;
 
 	public FoodServlet() {
@@ -40,14 +42,28 @@ public class FoodServlet extends HttpServlet {
 		}
 		return connection;
 	}
+	
+	public static boolean isNumeric(String str) { 
+		  try {  
+		    Double.parseDouble(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
 
 	private void listFoods(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		if (request.getAttribute("loggedin") != null) {
+			HttpSession session = request.getSession();
 			boolean loggedin = (boolean) request.getAttribute("loggedin");
 			String username = (String) request.getAttribute("username");
-			request.setAttribute(username, response);
 			int user_id = (int) request.getAttribute("user_id");
+			session.setAttribute("username", username);
+			session.setAttribute("user_id", user_id);
+			session.setAttribute("loggedin", loggedin);
+			System.out.println("added");
+			System.out.println(session.getAttribute("loggedin"));
 		}
 
 		List<Food> foods = new ArrayList<>();
@@ -71,9 +87,12 @@ public class FoodServlet extends HttpServlet {
 
 	private void logOut(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		request.removeAttribute("loggedin");
-		request.removeAttribute("username");
-		request.removeAttribute("user_id");
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("loggedin");
+		session.removeAttribute("username");
+		session.removeAttribute("user_id");
+
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
 	}
 
@@ -93,18 +112,33 @@ public class FoodServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
+		HttpSession session = request.getSession();
 		try {
 			switch (request.getParameterValues("button")[0]) {
 			case "logout":
 				logOut(request, response);
 				break;
 			default:
-				doGet(request, response);
+				if(isNumeric(request.getParameterValues("button")[0])) {
+					int food_id = Integer.parseInt(request.getParameterValues("button")[0]);
+					System.out.println(food_id);
+					int user_id = (int) session.getAttribute("user_id");
+					try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_CART)) {
+						preparedStatement.setInt(1, food_id);
+						preparedStatement.setInt(2, user_id);
+						int rs = preparedStatement.executeUpdate();
+						if(rs > 0) {
+							System.out.println("added");
+						}
+					}
+					
+				}
 				break;
 			}
 		} catch (Exception e) {
-			System.out.println("null");
+			System.out.println("something happened" + e);
 		}
+		
 		doGet(request, response);
 	}
 
