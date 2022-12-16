@@ -47,7 +47,7 @@ public class Order {
 		this.timestamp = timestamp;
 	}
 	public String getStatus() {
-		return address;
+		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
