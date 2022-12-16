@@ -25,8 +25,8 @@ public class OrderServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "cdev";
 	private static final String SELECT_ALL_ORDERS = "SELECT * FROM freshfoodies.order;"; //get
-	//put update here WIP for now
-	//put delete here WIP for now
+	private static final String EDIT_ORDER = "UPDATE freshfoodies.order SET status = ? WHERE order_id = ?;";
+	private static final String DELETE_ORDER = "DELETE FROM freshfoodies.order WHERE order_id = ?;";
 	private static final long serialVersionUID = 1L;
        
 	protected Connection getConnection() {
@@ -49,12 +49,7 @@ public class OrderServlet extends HttpServlet {
     
     private void listOrders(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		if (request.getAttribute("loggedin") != null) {
-			boolean loggedin = (boolean) request.getAttribute("loggedin");
-			String username = (String) request.getAttribute("username");
-			request.setAttribute(username, response);
-			int user_id = (int) request.getAttribute("user_id");
-		}
+
 
 		List<Order> orders = new ArrayList<>();
 		try (Connection connection = getConnection();
@@ -67,15 +62,20 @@ public class OrderServlet extends HttpServlet {
 				String address = rs.getString("address");
 				int timestamp = rs.getInt("timestamp");
 				String status = rs.getString("status");
+				System.out.println("running");
 				orders.add(new Order(order_id, order_user_id ,order_food_id, address, timestamp, status));
 			}
 		} catch (SQLException e) {
 			System.out.println("Testing");
 			System.out.println(e.getMessage());
+		} catch (Exception i) {
+			System.out.println("nani");
 		}
+		System.out.println(orders);
 		request.setAttribute("listOrders", orders);
 		request.getRequestDispatcher("/order.jsp").forward(request, response);
 	}
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -86,18 +86,49 @@ public class OrderServlet extends HttpServlet {
 
 		String action = request.getServletPath();
 		try {
+			
 				listOrders(request, response);
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
 
 	}
-
+ 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		try {
+			if(request.getParameter("EditButton") != null) {
+				int order_id = Integer.parseInt(request.getParameterValues("EditButton")[0]);
+				System.out.println("Completed Order"+ order_id);
+				try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(EDIT_ORDER);) {
+					statement.setString(1, "completed");
+					statement.setInt(2, order_id);
+					int f  = statement.executeUpdate();
+					if(f > 0) {
+						System.out.println(order_id + " has been completed!");
+					}
+				}
+				
+			
+			}
+			else if (request.getParameter("DeleteButton") != null) {
+				int order_id = Integer.parseInt(request.getParameterValues("DeleteButton")[0]);
+				System.out.println("Deleted order"+ order_id);
+				try(Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_ORDER);) {
+					statement.setInt(1, order_id);
+					int i  = statement.executeUpdate();
+					if(i > 0) {
+						System.out.println(order_id + " has been deleted!");
+					}
+				}
+			}
+		} catch (Exception e) {
+			
+		}
+		
 		doGet(request, response);
 	}
 
