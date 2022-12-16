@@ -55,10 +55,16 @@
   		<td>
   			<c:out value="${order.status}"></c:out>
   		</td>
+  		<td>
+  		  <!-- for each order in database edit/delete buttons which invoke the edit/delet funcs -->
+  		  <form action="OrderServlet" method="post">
+  		  	 	<button class="btn btn-link text-dark" value='${order.order_id}' name="EditButton">Complete</button> &nbsp;&nbsp;&nbsp;&nbsp; 
+          	</form>
+          <form action="OrderServlet" method="post">
+			<button class="btn btn-link text-dark" value='${order.order_id}' name="DeleteButton">Delete</button>
+			</form>
+  		</td>
   	</c:forEach>
-  	
-  	
-    
   </tbody>
 </table>
 </div>
