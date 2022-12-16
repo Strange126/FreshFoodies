@@ -119,7 +119,7 @@ public class OrderServlet extends HttpServlet {
 				System.out.println("Deleted order"+ order_id);
 				try(Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_ORDER);) {
 					statement.setInt(1, order_id);
-					int i  = statement.executeUpdate();
+					int i = statement.executeUpdate();
 					if(i > 0) {
 						System.out.println(order_id + " has been deleted!");
 					}
