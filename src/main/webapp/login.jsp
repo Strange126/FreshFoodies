@@ -5,7 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Fresh Foodies</title>
 <script src="./webjars/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="./webjars/bootstrap/5.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -15,7 +15,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid w-100">
 			<a class="navbar-brand"
-				href="<%=request.getContextPath()%>FoodServlet"><img
+				href="<%=request.getContextPath()%>/FoodServlet"><img
 				src="img/Fresh Foodies-logos_black.png" alt="" width="33"
 				height="33"><b>Fresh Foodies</b></a>
 			<button class="navbar-toggler" type="button"
