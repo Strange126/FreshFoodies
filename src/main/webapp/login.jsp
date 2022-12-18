@@ -15,7 +15,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid w-100">
 			<a class="navbar-brand"
-				href="<%=request.getContextPath()%>FoodServlet"><img
+				href="<%=request.getContextPath()%>/FoodServlet"><img
 				src="img/Fresh Foodies-logos_black.png" alt="" width="33"
 				height="33"><b>Fresh Foodies</b></a>
 			<button class="navbar-toggler" type="button"
