@@ -46,8 +46,6 @@
 					</c:when>
 					<c:otherwise>
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link active fs-4 "
-								aria-current="page" href="#">View Cart</a></li>
 							<li class="nav-item"><a class="nav-link fs-4 active"
 								href="<%=request.getContextPath()%>/login.jsp">Login</a></li>
 						</ul>
