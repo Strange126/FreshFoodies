@@ -26,7 +26,7 @@ public class CartServlet extends HttpServlet {
 	private String jdbcPassword = "cdev";
 	private static final String SELECT_ALL_FOOD_FROM_USER_CART = "SELECT freshfoodies.cart.cart_id, freshfoodies.food.food_id, freshfoodies.food.name, freshfoodies.food.price, freshfoodies.food.description from freshfoodies.food Inner JOIN freshfoodies.cart on freshfoodies.food.food_id = freshfoodies.cart.cart_food_id where freshfoodies.cart.cart_user_id = ?;";
 	private static final String DELETE_CART_ITEM = "DELETE FROM freshfoodies.cart WHERE cart_id = ?;";
-	private static final String INSERT_INTO_ORDER = "INSERT INTO freshfoodies.order VALUES (NULL,?,?,?,?);";
+	private static final String INSERT_INTO_ORDER = "INSERT INTO freshfoodies.order VALUES (NULL,?,?,?,?,?);";
 	private static final String DELETE_ALL_CART_ITEMS = "DELETE FROM freshfoodies.cart WHERE cart_user_id = ?;";
 	private static final long serialVersionUID = 1L;
 
@@ -121,6 +121,7 @@ public class CartServlet extends HttpServlet {
 							preparedStatement.setString(3, address);
 							int time = (int) (new Date().getTime()/1000);
 							preparedStatement.setInt(4, time);
+							preparedStatement.setString(5, "Cooking");
 							int rs = preparedStatement.executeUpdate();
 							if(rs > 0) {
 								System.out.println("Ordered");
