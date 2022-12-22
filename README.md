@@ -1,5 +1,5 @@
 # FreshFoodies
-## A Web application Made By Bernie and Zaiver For a Devops Project
+## A Web application Made By Bernie and Zavier For a Devops Project
 
 This is a Java Web application developed using java EE and Maven via eclipse
 
