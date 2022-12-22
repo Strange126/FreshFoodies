@@ -75,7 +75,7 @@
 							<div class="col-sm col-sm-offset-3">
 								<div class="col-sm-6 col-sm-offset-3 m-3">
 									<p>
-										<button class="btn btn-primary btn-lg" type="submit"
+										<button class="btn btn-primary btn-lg" type="submit" name="LoginButton"
 											value="Call Servlet">Login</button>
 									</p>
 								</div>
