@@ -5,7 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
 <meta charset="ISO-8859-1">
-<title>Version 1</title>
+<title>Version 2</title>
 <script src="./webjars/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="./webjars/bootstrap/5.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
