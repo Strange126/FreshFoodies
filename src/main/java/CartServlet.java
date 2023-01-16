@@ -21,9 +21,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/CartServlet")
 public class CartServlet extends HttpServlet {
-	private String jdbcURL = "jdbc:mysql://localhost:3306";
-	private String jdbcUsername = "root";
-	private String jdbcPassword = "cdev";
+	private String jdbcURL = "jdbc:mysql://freshfoodies.cygdhc9n97mq.us-east-1.rds.amazonaws.com:3306";
+	private String jdbcUsername = "admin";
+	private String jdbcPassword = "password";
 	private static final String SELECT_ALL_FOOD_FROM_USER_CART = "SELECT freshfoodies.cart.cart_id, freshfoodies.food.food_id, freshfoodies.food.name, freshfoodies.food.price, freshfoodies.food.description from freshfoodies.food Inner JOIN freshfoodies.cart on freshfoodies.food.food_id = freshfoodies.cart.cart_food_id where freshfoodies.cart.cart_user_id = ?;";
 	private static final String DELETE_CART_ITEM = "DELETE FROM freshfoodies.cart WHERE cart_id = ?;";
 	private static final String INSERT_INTO_ORDER = "INSERT INTO freshfoodies.order VALUES (NULL,?,?,?,?,?);";
