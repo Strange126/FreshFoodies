@@ -18,9 +18,9 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/FoodServlet")
 public class FoodServlet extends HttpServlet {
-	private String jdbcURL = "jdbc:mysql://localhost:3306";
-	private String jdbcUsername = "root";
-	private String jdbcPassword = "cdev";
+	private String jdbcURL = "jdbc:mysql://freshfoodies.cygdhc9n97mq.us-east-1.rds.amazonaws.com:3306";
+	private String jdbcUsername = "admin";
+	private String jdbcPassword = "password";
 	private static final String SELECT_ALL_FOOD = "SELECT * FROM freshfoodies.food;;";
 	private static final String INSERT_INTO_CART = "INSERT INTO freshfoodies.cart VALUES (null, ?, ?);";
 	private static final long serialVersionUID = 1L;

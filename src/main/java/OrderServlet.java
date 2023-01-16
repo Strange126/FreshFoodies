@@ -21,9 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/OrderServlet")
 public class OrderServlet extends HttpServlet {
-	private String jdbcURL = "jdbc:mysql://localhost:3306";
-	private String jdbcUsername = "root";
-	private String jdbcPassword = "cdev";
+	private String jdbcURL = "jdbc:mysql://freshfoodies.cygdhc9n97mq.us-east-1.rds.amazonaws.com:3306";
+	private String jdbcUsername = "admin";
+	private String jdbcPassword = "password";
 	private static final String SELECT_ALL_ORDERS = "SELECT * FROM freshfoodies.order;"; //get
 	private static final String EDIT_ORDER = "UPDATE freshfoodies.order SET status = ? WHERE order_id = ?;";
 	private static final String DELETE_ORDER = "DELETE FROM freshfoodies.order WHERE order_id = ?;";
